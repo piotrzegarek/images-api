@@ -8,8 +8,11 @@ packages = [{include = "images_api"}]
 license = "MIT"
 
 [tool.poetry.dependencies]
+django = "4.2.6"
+djangorestframework = "3.14.0"
+django-filter = "23.3"
+psycopg2-binary = "2.9.9"
 python = "3.10.2"
-
 
 [tool.poetry.dev-dependencies]
 
