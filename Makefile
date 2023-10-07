@@ -1,9 +1,10 @@
-.PHONY: init run migration migrate help
+.PHONY: init run migration migrate lint help
 
 
 init:
 	@echo "${GREEN}Installing dependencies...${NC}"
 	@poetry install
+	@pre-commit install
 	@chmod +x run_server.sh
 	@echo "${GREEN}Dependencies installed successfully.${NC}"
 
@@ -21,6 +22,10 @@ migrate:
 	@python manage.py migrate
 	@echo "${GREEN}Migrations applied successfully.${NC}"
 
+lint:
+	@echo "${GREEN}Running linters...${NC}"
+	@pre-commit run --all-files
+
 help:
 	@echo "${GREEN}Django Application Makefile${NC}"
 	@echo "Available commands:"
@@ -28,6 +33,7 @@ help:
 	@echo "${YELLOW}make run${NC} - Run the development server"
 	@echo "${YELLOW}make migration${NC} - Create database migrations"
 	@echo "${YELLOW}make migrate${NC} - Apply database migrations"
+	@echo "${YELLOW}make lint${NC} - Run linters with pre-commit on all files"
 
 
 # Define ANSI color codes
