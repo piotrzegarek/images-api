@@ -1,10 +1,11 @@
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = True
-SECRET_KEY = "django-insecure-bk1^)d8j6*uz8dsxjm@ucbl63&te5m1k&&myr#3ecuimy$enbx"
+DEBUG = os.environ.get("DEBUG", False)
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 ALLOWED_HOSTS = []
 
@@ -55,8 +56,12 @@ WSGI_APPLICATION = "imagesapi.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "PORT": os.environ.get("POSTGRES_PORT"),
     }
 }
 
